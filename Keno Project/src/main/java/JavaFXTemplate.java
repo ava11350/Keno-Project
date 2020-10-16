@@ -4,6 +4,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -50,9 +53,25 @@ public class JavaFXTemplate extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		primaryStage.setTitle("Welcome to JavaFX");
+		primaryStage.setTitle("Keno");
 
 		/** Menu Scene **/
+
+		/** Menu Bar **/
+		Menu menuBarMenu = new Menu("Menu");
+		MenuItem rulesMenuItem = new MenuItem("Rules");
+
+		MenuItem oddsMenuItem = new MenuItem("Odds");
+		MenuItem exitMenuItem = new MenuItem("Exit");
+		exitMenuItem.setOnAction(e -> {
+			exitMenuItem.setStyle(CLICKED_BUTTON_STYLE);
+			System.exit(0);
+		});
+		menuBarMenu.getItems().add(rulesMenuItem);
+		menuBarMenu.getItems().add(oddsMenuItem);
+		menuBarMenu.getItems().add(exitMenuItem);
+		MenuBar menuBar = new MenuBar();
+		menuBar.getMenus().add(menuBarMenu);
 
 		BackgroundFill background_fill = new BackgroundFill(Color.NAVY, CornerRadii.EMPTY, Insets.EMPTY);
 
@@ -86,15 +105,15 @@ public class JavaFXTemplate extends Application {
 			exit.setStyle(CLICKED_BUTTON_STYLE);
 			System.exit(0);
 		});
-
 		menuGrid.add(rules, 0, 0);
 		menuGrid.add(odds, 0, 1);
 		menuGrid.add(exit, 0, 2);
+		menuGrid.setMinHeight(900);
 
 		menuGrid.setAlignment(Pos.CENTER);
 		menuGrid.setVgap(40);
-
-		Scene menu = new Scene(menuGrid, 1000, 1000);
+		VBox mainVbox = new VBox(menuBar, menuGrid);
+		Scene menu = new Scene(mainVbox, 1000, 1000);
 		primaryStage.setScene(menu);
 		primaryStage.show();
 
@@ -147,6 +166,13 @@ public class JavaFXTemplate extends Application {
 
 		//rules override
 		rules.setOnMouseClicked(e -> {
+			rules.setStyle(CLICKED_BUTTON_STYLE);
+			primaryStage.setScene(rulesScene);
+		});
+
+		//rules MenuItem Override
+		rulesMenuItem.setOnAction(e -> {
+			rulesMenuItem.setStyle(CLICKED_BUTTON_STYLE);
 			primaryStage.setScene(rulesScene);
 		});
 
@@ -306,7 +332,10 @@ public class JavaFXTemplate extends Application {
 		odds.setOnMouseClicked(e -> {
 			primaryStage.setScene(oddsScene);
 		});
-
+		//odds MenuItem overide
+		oddsMenuItem.setOnAction(e -> {
+			primaryStage.setScene(oddsScene);
+		});
 
 		/** Game Scene **/
 
