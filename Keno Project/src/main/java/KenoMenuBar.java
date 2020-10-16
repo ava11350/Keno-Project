@@ -17,7 +17,7 @@ public class KenoMenuBar {
         oddsMenuItem = new MenuItem("Odds");
         exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction(e -> {
-            exitMenuItem.setStyle(JavaFXTemplate.CLICKED_BUTTON_STYLE);
+            exitMenuItem.setStyle(KenoRunner.CLICKED_BUTTON_STYLE);
             System.exit(0);
         });
         menuBarMenu.getItems().add(rulesMenuItem);
@@ -32,13 +32,13 @@ public class KenoMenuBar {
     }
     public void setRulesMenuItem(Stage primaryStage, Scene rulesScene){
         rulesMenuItem.setOnAction(e -> {
-            rulesMenuItem.setStyle(JavaFXTemplate.CLICKED_BUTTON_STYLE);
+            rulesMenuItem.setStyle(KenoRunner.CLICKED_BUTTON_STYLE);
             primaryStage.setScene(rulesScene);
         });
     }
     public void setOddsMenuItem(Stage primaryStage, Scene oddsScene){
         oddsMenuItem.setOnAction(e -> {
-            oddsMenuItem.setStyle(JavaFXTemplate.CLICKED_BUTTON_STYLE);
+            oddsMenuItem.setStyle(KenoRunner.CLICKED_BUTTON_STYLE);
             primaryStage.setScene(oddsScene);
         });
     }
