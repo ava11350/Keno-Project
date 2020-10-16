@@ -21,7 +21,7 @@ public class JavaFXTemplate extends Application {
 			"-fx-background-color: #fffaec;";
 	private static final String HOVERED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #e5e1d4;";
-	private static final String CLICKED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static final String CLICKED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #b2afa5;";
 
 	private static final String GENERAL_TEXT_BUTTON_STYLE = "-fx-font-size : 16px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
@@ -112,7 +112,8 @@ public class JavaFXTemplate extends Application {
 
 		menuGrid.setAlignment(Pos.CENTER);
 		menuGrid.setVgap(40);
-		VBox mainVbox = new VBox(menuBar, menuGrid);
+		KenoMenuBar ourMenuBar = new KenoMenuBar();
+		VBox mainVbox = new VBox(ourMenuBar.getMenuBar(), menuGrid);
 		Scene menu = new Scene(mainVbox, 1000, 1000);
 		primaryStage.setScene(menu);
 		primaryStage.show();
@@ -171,10 +172,7 @@ public class JavaFXTemplate extends Application {
 		});
 
 		//rules MenuItem Override
-		rulesMenuItem.setOnAction(e -> {
-			rulesMenuItem.setStyle(CLICKED_BUTTON_STYLE);
-			primaryStage.setScene(rulesScene);
-		});
+		ourMenuBar.setRulesMenuItem(primaryStage, rulesScene);
 
 		/** Odds Scene **/
 
@@ -332,10 +330,8 @@ public class JavaFXTemplate extends Application {
 		odds.setOnMouseClicked(e -> {
 			primaryStage.setScene(oddsScene);
 		});
-		//odds MenuItem overide
-		oddsMenuItem.setOnAction(e -> {
-			primaryStage.setScene(oddsScene);
-		});
+		//odds MenuItem override
+		ourMenuBar.setOddsMenuItem(primaryStage, oddsScene);
 
 		/** Game Scene **/
 
