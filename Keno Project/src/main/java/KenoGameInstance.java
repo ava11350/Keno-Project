@@ -28,6 +28,12 @@ public class KenoGameInstance {
             return true;
         }
     }
+    public boolean isUserInputFull(){
+        if (userInput.size() == spotsToPlay){
+            return true;
+        } else
+            return false;
+    }
     public int computerDraw(){
         int temp = new Random().nextInt(80) + 1;
         while(computerResult.contains(new Integer(temp))){
