@@ -2,10 +2,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class KenoRulesScene {
-    private Scene rulesScene;
+    Scene rulesScene;
     public KenoRulesScene(Stage primaryStage, Scene mainMenu){
         Button bRet = new Button("RETURN");
 
@@ -50,10 +51,9 @@ public class KenoRulesScene {
         rulesPageGrid.setAlignment(Pos.CENTER);
         rulesPageGrid.setVgap(40);
 
-        rulesScene = new Scene(rulesPageGrid, 1000, 1000);
-
+        rulesScene = new Scene(rulesPageGrid,1000,1000);
     }
-    public Scene getRulesScene (){
+    public Scene getRulesScene(){
         return rulesScene;
     }
 }

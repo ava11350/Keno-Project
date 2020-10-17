@@ -11,14 +11,14 @@ import javafx.geometry.Pos;
 
 public class KenoRunner extends Application {
 
-	public static final String IDLE_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String IDLE_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #fffaec;";
-	public static final String HOVERED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String HOVERED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #e5e1d4;";
-	public static final String CLICKED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String CLICKED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #b2afa5;";
 
-	public static final String GENERAL_TEXT_BUTTON_STYLE = "-fx-font-size : 16px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String GENERAL_TEXT_BUTTON_STYLE = "-fx-font-size : 16px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #fffaec;";
 
 	public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class KenoRunner extends Application {
 
 		/** Menu Scene **/
 
-		BackgroundFill background_fill = new BackgroundFill(Color.NAVY, CornerRadii.EMPTY, Insets.EMPTY);
+		BackgroundFill background_fill = new BackgroundFill(Color.MINTCREAM, CornerRadii.EMPTY, Insets.EMPTY);
 
 		Background background = new Background(background_fill);
 
@@ -89,9 +89,10 @@ public class KenoRunner extends Application {
 			exit.setStyle(CLICKED_BUTTON_STYLE);
 			System.exit(0);
 		});
-		menuGrid.add(rules, 0, 0);
-		menuGrid.add(odds, 0, 1);
-		menuGrid.add(play, 0, 2);
+
+		menuGrid.add(play, 0, 0);
+		menuGrid.add(rules, 0, 1);
+		menuGrid.add(odds, 0, 2);
 		menuGrid.add(exit, 0, 3);
 		menuGrid.setMinHeight(900);
 
@@ -105,13 +106,14 @@ public class KenoRunner extends Application {
 
 		/** Rules Scene **/
 		KenoRulesScene ourRulesPage = new KenoRulesScene(primaryStage, menu);
+		Scene rulesScene = ourRulesPage.getRulesScene();
 		//rules override
 		rules.setOnMouseClicked(e -> {
 			rules.setStyle(CLICKED_BUTTON_STYLE);
-			primaryStage.setScene(ourRulesPage.getRulesScene());
+			primaryStage.setScene(rulesScene);
 		});
 		//rules MenuItem Override
-		ourMenuBar.setRulesMenuItem(primaryStage, ourRulesPage.getRulesScene());
+		ourMenuBar.setRulesMenuItem(primaryStage, rulesScene);
 
 		/** Odds Scene **/
 		KenoOddsScene ourOddsScene = new KenoOddsScene(primaryStage, menu);

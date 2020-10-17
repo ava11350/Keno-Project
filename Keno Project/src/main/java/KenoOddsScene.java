@@ -152,7 +152,7 @@ public class KenoOddsScene {
 
 
         oddsPageGrid.setAlignment(Pos.CENTER);
-        oddsPageGrid.setVgap(40);
+        oddsPageGrid.setVgap(20);
         oddsPageGrid.setHgap(20);
 
         oddsScene = new Scene(oddsPageGrid, 1000, 1000);
