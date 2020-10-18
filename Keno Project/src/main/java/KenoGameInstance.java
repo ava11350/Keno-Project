@@ -34,6 +34,11 @@ public class KenoGameInstance {
         } else
             return false;
     }
+    public void softReset(){
+        computerResult.clear();
+        hits.clear();
+        moneyWon = 0;
+    }
     public int computerDraw(){
         int temp = new Random().nextInt(80) + 1;
         while(computerResult.contains(new Integer(temp))){

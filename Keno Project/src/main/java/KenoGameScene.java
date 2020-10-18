@@ -46,11 +46,21 @@ public class KenoGameScene {
     private Button rulesButton;
     private Button oddsButton;
 
+    private Button oneDraw;
+    private Button twoDraw;
+    private Button threeDraw;
+    private Button fourDraw;
+
     private Text selectedGrids;
     private Text drawnGrids;
     private Text winnings;
+    private Text drawResult;
 
     private int numSpot;
+
+    private int numDraws;
+    private int timelineCounter;
+    private int roundWinnings;
 
     private int totalWinnings;
 
@@ -87,6 +97,7 @@ public class KenoGameScene {
 
     public KenoGameScene(Stage primaryStage, Scene mainMenu){
         totalWinnings = 0;
+        numDraws = 1; //default draws
         initColor();
         Button newLookButton = new Button("NEW LOOK");
         newLookButton.setStyle(IDLE_TEXT);
@@ -132,6 +143,10 @@ public class KenoGameScene {
             tenSpot.setDisable(true);
             rulesButton.setDisable(true);
             oddsButton.setDisable(true);
+            oneDraw.setDisable(true);
+            twoDraw.setDisable(true);
+            threeDraw.setDisable(true);
+            fourDraw.setDisable(true);
             bet.setDisable(true);
         });
         /**Button botTest2 = new Button("Test spot");
@@ -170,6 +185,8 @@ public class KenoGameScene {
         selectedGrids.setStyle(GEN_TEXT);
         drawnGrids = new Text("Draws: ");
         drawnGrids.setStyle(GEN_TEXT);
+        drawResult = new Text("Draw results: ");
+        drawResult.setStyle(GEN_TEXT);
         winnings = new Text("To start a game:\nSelect spots you want to play\nSelect your spots on the grid\nAnd place your bets!");
         winnings.setStyle(GEN_TEXT);
         GridPane grid = new GridPane();
@@ -201,7 +218,7 @@ public class KenoGameScene {
 //        grid.setGridLinesVisible(true);
 
         //Text Side panel
-        VBox texts = new VBox(selectedGrids, drawnGrids, winnings);
+        VBox texts = new VBox(selectedGrids, drawnGrids, drawResult, winnings);
         texts.setStyle(IDLE_TEXT);
         texts.setPadding(new Insets(20,0,20,0));
         //Left Side panel
@@ -212,22 +229,35 @@ public class KenoGameScene {
         leftVbox.setPadding(new Insets(0,40,0,40));
 
         //Draws Vbox
-        Button oneDraw = new Button("1");
+        oneDraw = new Button("1");
 //        oneDraw.setStyle(IDLE_TEXT);
         oneDraw.setMinWidth(25);
         oneDraw.setMinHeight(25);
-        Button twoDraw = new Button("2");
+        oneDraw.setOnMouseClicked(e -> {
+            numDraws = 1;
+        });
+
+        twoDraw = new Button("2");
 //        twoDraw.setStyle(IDLE_TEXT);
         twoDraw.setMinWidth(25);
         twoDraw.setMinHeight(25);
-        Button threeDraw = new Button("3");
+        twoDraw.setOnMouseClicked(e ->{
+            numDraws =2;
+        });
+        threeDraw = new Button("3");
 //        threeDraw.setStyle(IDLE_TEXT);
         threeDraw.setMinWidth(25);
         threeDraw.setMinHeight(25);
-        Button fourDraw = new Button("4");
+        threeDraw.setOnMouseClicked(e -> {
+            numDraws = 3;
+        });
+        fourDraw = new Button("4");
 //        fourDraw.setStyle(IDLE_TEXT);
         fourDraw.setMinWidth(25);
         fourDraw.setMinHeight(25);
+        fourDraw.setOnMouseClicked(e -> {
+            numDraws = 4;
+        });
 
         GridPane drawSelections = new GridPane();
         drawSelections.setHgap(14);
@@ -435,6 +465,9 @@ public class KenoGameScene {
             Button current = gridButtons.get(i);
             current.setDisable(false);
             current.setOnMouseClicked(e -> {
+                for(int q = 0; q<gridButtons.size(); q++){ //ensure all buttons are enabled
+                    gridButtons.get(q).setDisable(false);
+                }
                 System.out.println("Button pressed: "+ current.getText());
                 if(instance.userInput.contains(new Integer(current.getText()))){ //if it was already selected, remove selection
                     gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
@@ -468,7 +501,8 @@ public class KenoGameScene {
                     if (instance.isUserInputFull()) {
 
                         for (int j = 0; j < gridButtons.size(); j++) {
-                            gridButtons.get(j).setDisable(true);
+                            if(!instance.userInput.contains(new Integer(gridButtons.get(j).getText())))
+                                gridButtons.get(j).setDisable(true);
                         }
                     }
                 }
@@ -484,6 +518,19 @@ public class KenoGameScene {
         drawnGrids.setText("Drawn:\n");
         bet.setDisable(true);
         bet.setStyle(IDLE_TEXT);
+    }
+
+    public void softReset(){
+        for (int i = 0; i < gridButtons.size(); i++){
+            if(!instance.userInput.contains(new Integer(gridButtons.get(i).getText()))){
+                gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
+            }
+            else{
+                gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+            }
+        }
+        drawnGrids.setText("Drawn:\n");
+        instance.softReset();
     }
 
 
@@ -525,21 +572,41 @@ public class KenoGameScene {
             return;
         }
         else{
+            timelineCounter = 0;
             timeline.setCycleCount(20);
             timeline.play();
             timeline.setOnFinished(e -> {
-                totalWinnings+=instance.moneyWon;
-                winnings.setText("You matched " + instance.hits.size() + " numbers.\nYou won $" + instance.moneyWon +" this round\nTotal winnings: $" + totalWinnings);
-                oneSpot.setDisable(false);
-                oneSpot.setStyle(IDLE_TEXT);
-                fourSpot.setDisable(false);
-                fourSpot.setStyle(IDLE_TEXT);
-                eightSpot.setDisable(false);
-                eightSpot.setStyle(IDLE_TEXT);
-                tenSpot.setDisable(false);
-                tenSpot.setStyle(IDLE_TEXT);
-                rulesButton.setDisable(true);
-                oddsButton.setDisable(true);
+                timelineCounter++;
+                drawResult.setText(
+                        drawResult.getText() +
+                                "\n"+
+                                "Draw " + timelineCounter + ": " +
+                                instance.hits.size() +
+                                " hits"
+                );
+                totalWinnings += instance.moneyWon;
+                if(timelineCounter == numDraws) {
+                    totalWinnings += instance.moneyWon;
+                    winnings.setText(/*"You matched " + instance.hits.size() + " numbers.\n" + */ "You won $" + instance.moneyWon + " this round\nTotal winnings: $" + totalWinnings);
+                    oneSpot.setDisable(false);
+                    oneSpot.setStyle(IDLE_TEXT);
+                    fourSpot.setDisable(false);
+                    fourSpot.setStyle(IDLE_TEXT);
+                    eightSpot.setDisable(false);
+                    eightSpot.setStyle(IDLE_TEXT);
+                    tenSpot.setDisable(false);
+                    tenSpot.setStyle(IDLE_TEXT);
+                    rulesButton.setDisable(false);
+                    oddsButton.setDisable(false);
+                    oneDraw.setDisable(false);
+                    twoDraw.setDisable(false);
+                    threeDraw.setDisable(false);
+                    fourDraw.setDisable(false);
+                }
+                else{
+                    softReset();
+                    timeline.play();
+                }
             });
             /**for (int i = 0; i<20; i++){
                 int draw = instance.computerDraw();
