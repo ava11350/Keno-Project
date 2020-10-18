@@ -7,11 +7,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import jdk.nashorn.internal.runtime.ECMAException;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
@@ -40,6 +42,9 @@ public class KenoGameScene {
     private Button fourSpot;
     private Button eightSpot;
     private Button tenSpot;
+
+    private Button rulesButton;
+    private Button oddsButton;
 
     private Text selectedGrids;
     private Text drawnGrids;
@@ -88,12 +93,12 @@ public class KenoGameScene {
         newLookButton.setMinWidth(200);
         newLookButton.setMinHeight(75);
         setButton(newLookButton);
-        Button rulesButton = new Button("RULES");
+        rulesButton = new Button("RULES");
         rulesButton.setStyle(IDLE_TEXT);
         rulesButton.setMinWidth(200);
         rulesButton.setMinHeight(75);
         setButton(rulesButton);
-        Button oddsButton = new Button("ODDS");
+        oddsButton = new Button("ODDS");
         oddsButton.setStyle(IDLE_TEXT);
         oddsButton.setMinWidth(200);
         oddsButton.setMinHeight(75);
@@ -117,10 +122,16 @@ public class KenoGameScene {
             }else{
                 computerPicks();
             }
-            oneSpot.setStyle(IDLE_TEXT);
-            fourSpot.setStyle(IDLE_TEXT);
-            eightSpot.setStyle(IDLE_TEXT);
-            tenSpot.setStyle(IDLE_TEXT);
+//            oneSpot.setStyle(IDLE_TEXT);
+//            fourSpot.setStyle(IDLE_TEXT);
+//            eightSpot.setStyle(IDLE_TEXT);
+//            tenSpot.setStyle(IDLE_TEXT);
+            oneSpot.setDisable(true);
+            fourSpot.setDisable(true);
+            eightSpot.setDisable(true);
+            tenSpot.setDisable(true);
+            rulesButton.setDisable(true);
+            oddsButton.setDisable(true);
             bet.setDisable(true);
         });
         /**Button botTest2 = new Button("Test spot");
@@ -155,9 +166,12 @@ public class KenoGameScene {
         //setButton(tenSpot);
 
         //Text boxes
-        selectedGrids = new Text("Selected: ");
+        selectedGrids = new Text("Selected:");
+        selectedGrids.setStyle(GEN_TEXT);
         drawnGrids = new Text("Draws: ");
-        winnings = new Text("");
+        drawnGrids.setStyle(GEN_TEXT);
+        winnings = new Text("To start a game:\nSelect spots you want to play\nSelect your spots on the grid\nAnd place your bets!");
+        winnings.setStyle(GEN_TEXT);
         GridPane grid = new GridPane();
         gridButtons = new ArrayList<>();
         for(int i=0; i<8; i++){
@@ -186,8 +200,12 @@ public class KenoGameScene {
         grid.setPadding(new Insets(40,40,60,40));
 //        grid.setGridLinesVisible(true);
 
+        //Text Side panel
+        VBox texts = new VBox(selectedGrids, drawnGrids, winnings);
+        texts.setStyle(IDLE_TEXT);
+        texts.setPadding(new Insets(20,0,20,0));
         //Left Side panel
-        VBox leftVbox = new VBox(selectedGrids, drawnGrids, winnings, newLookButton, rulesButton, oddsButton, exitButton);
+        VBox leftVbox = new VBox(texts, newLookButton, rulesButton, oddsButton, exitButton);
         leftVbox.setStyle("-fx-background-color: " + accent + ";");
         leftVbox.setAlignment(Pos.CENTER);
         leftVbox.setSpacing(20);
@@ -303,11 +321,11 @@ public class KenoGameScene {
             }
             oneSpot.setStyle(CLICK_TEXT);
             System.out.println("ONE SPOT CLICKED");
-            bet.setDisable(false);
             if(instance != null){
                 instance = null;
                 resetButtons();
             }
+            bet.setDisable(false);
             makeSelection(1);
         });
 
@@ -324,11 +342,11 @@ public class KenoGameScene {
             }
             fourSpot.setStyle(CLICK_TEXT);
             System.out.println("FOUR SPOT CLICKED");
-            bet.setDisable(false);
             if(instance != null){
                 instance = null;
                 resetButtons();
             }
+            bet.setDisable(false);
             makeSelection(4);
         });
 
@@ -345,11 +363,11 @@ public class KenoGameScene {
             }
             eightSpot.setStyle(CLICK_TEXT);
             System.out.println("EIGHT SPOT CLICKED");
-            bet.setDisable(false);
             if(instance != null){
                 instance = null;
                 resetButtons();
             }
+            bet.setDisable(false);
             makeSelection(8);
         });
 
@@ -366,11 +384,11 @@ public class KenoGameScene {
             }
             tenSpot.setStyle(CLICK_TEXT);
             System.out.println("TEN SPOT CLICKED");
-            bet.setDisable(false);
             if(instance != null){
                 instance = null;
                 resetButtons();
             }
+            bet.setDisable(false);
             makeSelection(10);
         });
 
@@ -391,14 +409,31 @@ public class KenoGameScene {
                 if(instance.userInput.contains(new Integer(current.getText()))){ //if it was already selected, remove selection
                     gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
                     instance.userInput.remove(instance.userInput.indexOf(new Integer(current.getText())));
-                    selectedGrids.setText("Selected: \n");
+                    selectedGrids.setText("Selected:\n");
                     for(int x = 0; x<instance.userInput.size(); x++){
-                        selectedGrids.setText(selectedGrids.getText()+ "\n" + current.getText());
+                        if(x !=0){
+                            selectedGrids.setText(selectedGrids.getText() + ", " + instance.userInput.get(x));
+                            if(x%5 ==0){
+                                selectedGrids.setText(selectedGrids.getText() + "\n");
+                            }
+                        }
+                        else {
+                            selectedGrids.setText(selectedGrids.getText() +instance.userInput.get(x));
+                        }
                     }
                 }
                 else {
                     gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
-                    selectedGrids.setText(selectedGrids.getText() + "\n" + current.getText());
+
+                    if(instance.userInput.size() != 0) { // dont add comma on first line
+                        selectedGrids.setText(selectedGrids.getText() + ", " + current.getText());
+                        if(instance.userInput.size()%5 == 0){
+                            selectedGrids.setText(selectedGrids.getText() + "\n"); // add a newline after 5 inputs
+                        }
+                    }
+                    else{
+                        selectedGrids.setText(selectedGrids.getText() + current.getText());
+                    }
                     instance.pushInput(new Integer(current.getText()));
                     if (instance.isUserInputFull()) {
 
@@ -415,9 +450,9 @@ public class KenoGameScene {
         for (int i = 0; i<gridButtons.size(); i++){
             gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
         }
-        selectedGrids.setText("Selected: ");
-        drawnGrids.setText("Drawn: ");
-        bet.setDisable(false);
+        selectedGrids.setText("Selected:\n");
+        drawnGrids.setText("Drawn:\n");
+        bet.setDisable(true);
         bet.setStyle(IDLE_TEXT);
     }
 
@@ -426,7 +461,18 @@ public class KenoGameScene {
     EventHandler<ActionEvent> eventHandler = (f -> {
         int draw = instance.computerDraw();
         System.out.println(draw);
-        drawnGrids.setText(drawnGrids.getText() + "\n" + draw);
+
+            if((instance.computerResult.size()-1)%5 == 0){
+                if(instance.computerResult.size()-1 == 0)
+                    drawnGrids.setText(drawnGrids.getText() + draw);
+                else
+                    drawnGrids.setText(drawnGrids.getText() + ",\n" + draw); //add a new line after 5 have been drawn
+            }
+            else {
+
+                    drawnGrids.setText(drawnGrids.getText() + ", " + draw);
+            }
+
         Button b1 = gridButtons.get(draw - 1);
         if(instance.userInput.contains(new Integer(b1.getText())))
             b1.setStyle("-fx-background-color: " + "#00FF00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
@@ -451,6 +497,20 @@ public class KenoGameScene {
         else{
             timeline.setCycleCount(20);
             timeline.play();
+            timeline.setOnFinished(e -> {
+                totalWinnings+=instance.moneyWon;
+                winnings.setText("You matched " + instance.hits.size() + " numbers.\nYou won $" + instance.moneyWon +" this round\nTotal winnings: $" + totalWinnings);
+                oneSpot.setDisable(false);
+                oneSpot.setStyle(IDLE_TEXT);
+                fourSpot.setDisable(false);
+                fourSpot.setStyle(IDLE_TEXT);
+                eightSpot.setDisable(false);
+                eightSpot.setStyle(IDLE_TEXT);
+                tenSpot.setDisable(false);
+                tenSpot.setStyle(IDLE_TEXT);
+                rulesButton.setDisable(true);
+                oddsButton.setDisable(true);
+            });
             /**for (int i = 0; i<20; i++){
                 int draw = instance.computerDraw();
                 System.out.println(draw);
@@ -462,8 +522,6 @@ public class KenoGameScene {
                     b1.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + ";");
             }*/
         }
-        totalWinnings+=instance.moneyWon;
-        winnings.setText("You matched " + instance.hits.size() + " numbers.\nYou won $" + instance.moneyWon +" this round\nTotal winnings: $" + totalWinnings);
 
     }
 
@@ -475,7 +533,19 @@ public class KenoGameScene {
         Button selected = gridButtons.get(randomNumber-1);
         System.out.println("Random number: " + randomNumber + " Grid contents: "+ selected.getText());
         selected.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
-        selectedGrids.setText(selectedGrids.getText() + "\n" + selected.getText());
+
+
+
+
+        if(instance.userInput.size() != 0){ //if at end, dont add comma
+            if (instance.userInput.size() % 5 == 0) {
+                selectedGrids.setText(selectedGrids.getText() + ",\n" +selected.getText());
+            } else
+                selectedGrids.setText(selectedGrids.getText() +", "+ selected.getText());
+        }
+        else {
+                selectedGrids.setText(selectedGrids.getText() +selected.getText());
+        }
         instance.pushInput(new Integer(selected.getText()));
     });
 
