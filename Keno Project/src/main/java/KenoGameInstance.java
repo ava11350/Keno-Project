@@ -55,44 +55,78 @@ public class KenoGameInstance {
                 switch (size) {
                     case 1:
                         moneyWon = 2;
+                        break;
+                    default:
+                        moneyWon = 0;
+                        break;
                 }
+                break;
             case 4:
                 switch (size){
                     case 2:
-                        moneyWon = 1;;
+                        moneyWon = 1;
+                        break;
                     case 3:
                         moneyWon = 5;
+                        break;
                     case 4:
                         moneyWon = 75;
+                        break;
+                    default:
+                        moneyWon = 0;
+                        break;
                 }
+                break;
             case 8:
                 switch (size){
                     case 4:
                         moneyWon = 2;
+                        break;
                     case 5:
                         moneyWon = 12;
+                        break;
                     case 6:
                         moneyWon = 50;
+                        break;
                     case 7:
                         moneyWon = 750;
+                        break;
                     case 8:
                         moneyWon = 10000;
+                        break;
+                    default:
+                        moneyWon = 0;
+                        break;
                 }
+                break;
             case 10:
                 switch (size){
                     case 5:
                         moneyWon = 2;
+                        break;
                     case 6:
                         moneyWon = 15;
+                        break;
                     case 7:
                         moneyWon = 150;
+                        break;
                     case 8:
                         moneyWon = 450;
+                        break;
                     case 9:
                         moneyWon = 4250;
+                        break;
                     case 10:
                         moneyWon = 100000;
+                        break;
+                    default:
+                        moneyWon = 0;
+                        break;
                 }
+                break;
+            default:
+                moneyWon = 0;
+                break;
         }
     }
 

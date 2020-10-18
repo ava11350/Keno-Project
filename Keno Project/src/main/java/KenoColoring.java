@@ -8,6 +8,8 @@ public class KenoColoring{
     private static String BACKGROUND;
     private static String ACCENT;
     private static String ColorPallete;
+    private static String primary;
+    private static String border;
 
     public static String getGeneral(){
         return GENERAL;
@@ -30,6 +32,10 @@ public class KenoColoring{
     public static String getBackground(){
         return BACKGROUND;
     }
+
+    public static String getPrimary(){ return primary; }
+
+    public static String getBorder(){ return border; }
 
     private static class LesbianPride extends KenoColoring{
         // #f1d4d4
@@ -68,6 +74,8 @@ public class KenoColoring{
         String getIDLE(){ return IDLE; }
         String getHOVERED(){ return HOVERED; }
         String getCLICKED(){ return CLICKED; }
+        String getBorderColor(){ return borderColor; }
+        String getPrimaryColor(){ return primaryColor; }
     }
 
     private static class CandyCorn extends KenoColoring{
@@ -107,6 +115,8 @@ public class KenoColoring{
         String getIDLE(){ return IDLE; }
         String getHOVERED(){ return HOVERED; }
         String getCLICKED(){ return CLICKED; }
+        String getBorderColor(){ return borderColor; }
+        String getPrimaryColor(){ return primaryColor; }
     }
 
     private static class SunSet extends KenoColoring{
@@ -146,6 +156,8 @@ public class KenoColoring{
         String getIDLE(){ return IDLE; }
         String getHOVERED(){ return HOVERED; }
         String getCLICKED(){ return CLICKED; }
+        String getBorderColor(){ return borderColor; }
+        String getPrimaryColor(){ return primaryColor; }
     }
 
     private static class SummerFruit extends KenoColoring{
@@ -186,6 +198,8 @@ public class KenoColoring{
         String getIDLE(){ return IDLE; }
         String getHOVERED(){ return HOVERED; }
         String getCLICKED(){ return CLICKED; }
+        String getBorderColor(){ return borderColor; }
+        String getPrimaryColor(){ return primaryColor; }
     }
 
     private static class Watermelon extends KenoColoring{
@@ -226,6 +240,8 @@ public class KenoColoring{
         String getIDLE(){ return IDLE; }
         String getHOVERED(){ return HOVERED; }
         String getCLICKED(){ return CLICKED; }
+        String getBorderColor(){ return borderColor; }
+        String getPrimaryColor(){ return primaryColor; }
     }
 
     private static class PeachTea extends KenoColoring{
@@ -266,6 +282,8 @@ public class KenoColoring{
         String getIDLE(){ return IDLE; }
         String getHOVERED(){ return HOVERED; }
         String getCLICKED(){ return CLICKED; }
+        String getBorderColor(){ return borderColor; }
+        String getPrimaryColor(){ return primaryColor; }
     }
 
     public KenoColoring(){
@@ -289,6 +307,8 @@ public class KenoColoring{
                 CLICKED = lesbian.getCLICKED();
                 BACKGROUND = lesbian.getBackgroundColor();
                 ACCENT = lesbian.getAccentColor();
+                primary = lesbian.getPrimaryColor();
+                border = lesbian.getBorderColor();
                 ColorPallete = "Candy";
                 break;
             case "Candy":
@@ -299,6 +319,8 @@ public class KenoColoring{
                 CLICKED = candy.getCLICKED();
                 BACKGROUND = candy.getBackgroundColor();
                 ACCENT = candy.getAccentColor();
+                primary = candy.getPrimaryColor();
+                border = candy.getBorderColor();
                 ColorPallete = "SunSet";
                 break;
             case "SunSet":
@@ -309,6 +331,8 @@ public class KenoColoring{
                 CLICKED = sun.getCLICKED();
                 BACKGROUND = sun.getBackgroundColor();
                 ACCENT = sun.getAccentColor();
+                primary = sun.getPrimaryColor();
+                border = sun.getBorderColor();
                 ColorPallete = "Summer";
                 break;
             case "Summer":
@@ -319,6 +343,8 @@ public class KenoColoring{
                 CLICKED = summer.getCLICKED();
                 BACKGROUND = summer.getBackgroundColor();
                 ACCENT = summer.getAccentColor();
+                primary = summer.getPrimaryColor();
+                border = summer.getBorderColor();
                 ColorPallete = "Watermelon";
                 break;
             case "Watermelon":
@@ -329,6 +355,8 @@ public class KenoColoring{
                 CLICKED = water.getCLICKED();
                 BACKGROUND = water.getBackgroundColor();
                 ACCENT = water.getAccentColor();
+                primary = water.getPrimaryColor();
+                border = water.getBorderColor();
                 ColorPallete = "Peach";
                 break;
             case "Peach":
@@ -339,6 +367,8 @@ public class KenoColoring{
                 CLICKED = peach.getCLICKED();
                 BACKGROUND = peach.getBackgroundColor();
                 ACCENT = peach.getAccentColor();
+                primary = peach.getPrimaryColor();
+                border = peach.getBorderColor();
                 ColorPallete = "Lesbian";
                 break;
             default:
@@ -349,13 +379,15 @@ public class KenoColoring{
                 CLICKED = temp.getCLICKED();
                 BACKGROUND = temp.getBackgroundColor();
                 ACCENT = temp.getAccentColor();
+                primary = temp.getPrimaryColor();
+                border = temp.getBorderColor();
                 break;
         }
     }
 
     public static Vector<String> newColors(){
         updateColors();
-        Vector<String> colorList = new Vector(5);
+        Vector<String> colorList = new Vector(8);
 
         colorList.add(getGeneral());
         colorList.add(getIdle());
@@ -363,6 +395,8 @@ public class KenoColoring{
         colorList.add(getClicked());
         colorList.add(getBackground());
         colorList.add(getAccent());
+        colorList.add(getPrimary());
+        colorList.add(getBorder());
 
         return colorList;
     }
