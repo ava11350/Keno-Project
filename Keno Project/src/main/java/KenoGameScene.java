@@ -1,3 +1,7 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -5,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import jdk.nashorn.internal.runtime.ECMAException;
 
 import java.util.ArrayList;
@@ -104,12 +109,14 @@ public class KenoGameScene {
         bet.setMinWidth(600);
         bet.setMinHeight(100);
         bet.setDisable(true);
+
         bet.setOnMouseClicked(e -> {
             bet.setStyle(CLICK_TEXT);
             if(instance.userInput.size()< numSpot){
                 randomFill();
+            }else{
+                computerPicks();
             }
-            computerPicks();
             oneSpot.setStyle(IDLE_TEXT);
             fourSpot.setStyle(IDLE_TEXT);
             eightSpot.setStyle(IDLE_TEXT);
@@ -414,6 +421,23 @@ public class KenoGameScene {
         bet.setStyle(IDLE_TEXT);
     }
 
+
+    // Overwriting computerPicks() to get it to time properly
+    EventHandler<ActionEvent> eventHandler = (f -> {
+        int draw = instance.computerDraw();
+        System.out.println(draw);
+        drawnGrids.setText(drawnGrids.getText() + "\n" + draw);
+        Button b1 = gridButtons.get(draw - 1);
+        if(instance.userInput.contains(new Integer(b1.getText())))
+            b1.setStyle("-fx-background-color: " + "#00FF00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+        else
+            b1.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + ";");
+    });
+
+    Timeline timeline = new Timeline(
+            new KeyFrame(Duration.millis(400), eventHandler)
+    );
+
     public void computerPicks(){
         for(int i = 0; i<gridButtons.size(); i++){
             Button current = gridButtons.get(i);
@@ -425,7 +449,9 @@ public class KenoGameScene {
             return;
         }
         else{
-            for (int i = 0; i<20; i++){
+            timeline.setCycleCount(20);
+            timeline.play();
+            /**for (int i = 0; i<20; i++){
                 int draw = instance.computerDraw();
                 System.out.println(draw);
                 drawnGrids.setText(drawnGrids.getText() + "\n" + draw);
@@ -434,15 +460,40 @@ public class KenoGameScene {
                     b1.setStyle("-fx-background-color: " + "#00FF00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
                 else
                     b1.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + ";");
-            }
+            }*/
         }
         totalWinnings+=instance.moneyWon;
         winnings.setText("You matched " + instance.hits.size() + " numbers.\nYou won $" + instance.moneyWon +" this round\nTotal winnings: $" + totalWinnings);
 
     }
+
+    EventHandler<ActionEvent> eventHandler2 = (f -> {
+        int randomNumber = new Random().nextInt(80) + 1;
+        while(instance.userInput.contains(new Integer(randomNumber))){
+            randomNumber = new Random().nextInt(80) + 1;
+        }
+        Button selected = gridButtons.get(randomNumber-1);
+        System.out.println("Random number: " + randomNumber + " Grid contents: "+ selected.getText());
+        selected.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+        selectedGrids.setText(selectedGrids.getText() + "\n" + selected.getText());
+        instance.pushInput(new Integer(selected.getText()));
+    });
+
+    Timeline timeline2 = new Timeline(
+            new KeyFrame(Duration.millis(600), eventHandler2)
+    );
+
     public void randomFill(){//randomly selects random selections for the user if they decide not to fill up all their spots
         int numSelected = instance.userInput.size();
-        for(int i = 0; i<numSpot-numSelected; i++){
+
+        timeline2.setCycleCount(numSpot-numSelected);
+        timeline2.play();
+
+        timeline2.setOnFinished(event -> {
+            computerPicks();
+        });
+
+        /**for(int i = 0; i<numSpot-numSelected; i++){
             int randomNumber = new Random().nextInt(80) + 1;
             while(instance.userInput.contains(new Integer(randomNumber))){
                 randomNumber = new Random().nextInt(80) + 1;
@@ -458,7 +509,7 @@ public class KenoGameScene {
 //                    gridButtons.get(j).setDisable(true);
 //                }
 //            }
-        }
+        } */
     }
 
 
