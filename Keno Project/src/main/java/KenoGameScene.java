@@ -197,7 +197,7 @@ public class KenoGameScene {
         grid.setVgap(14);
         grid.setAlignment(Pos.CENTER);
 
-        grid.setPadding(new Insets(40,40,60,40));
+        grid.setPadding(new Insets(40,40,40,40));
 //        grid.setGridLinesVisible(true);
 
         //Text Side panel
@@ -211,12 +211,42 @@ public class KenoGameScene {
         leftVbox.setSpacing(20);
         leftVbox.setPadding(new Insets(0,40,0,40));
 
+        //Draws Vbox
+        Button oneDraw = new Button("1");
+//        oneDraw.setStyle(IDLE_TEXT);
+        oneDraw.setMinWidth(25);
+        oneDraw.setMinHeight(25);
+        Button twoDraw = new Button("2");
+//        twoDraw.setStyle(IDLE_TEXT);
+        twoDraw.setMinWidth(25);
+        twoDraw.setMinHeight(25);
+        Button threeDraw = new Button("3");
+//        threeDraw.setStyle(IDLE_TEXT);
+        threeDraw.setMinWidth(25);
+        threeDraw.setMinHeight(25);
+        Button fourDraw = new Button("4");
+//        fourDraw.setStyle(IDLE_TEXT);
+        fourDraw.setMinWidth(25);
+        fourDraw.setMinHeight(25);
+
+        GridPane drawSelections = new GridPane();
+        drawSelections.setHgap(14);
+        drawSelections.setVgap(14);
+
+        drawSelections.add(oneDraw, 0, 0);
+        drawSelections.add(twoDraw, 1,0);
+        drawSelections.add(threeDraw, 0,1);
+        drawSelections.add(fourDraw, 1,1);
+        Text drawText = new Text("Drawings");
+        drawText.setStyle(GEN_TEXT);
+        VBox drawBox = new VBox(drawText, drawSelections);
+
         //Bottom button panel
-        HBox innerRight = new HBox(bet/**,botTest2,botTest3**/);
+        HBox innerRight = new HBox(bet, drawBox);
         innerRight.setStyle("-fx-background-color: " + accent + ";");
         innerRight.setAlignment(Pos.CENTER);
         innerRight.setSpacing(20);
-        innerRight.setPadding(new Insets(40,20,40,20));
+        innerRight.setPadding(new Insets(20,20,20,20));
 
         //Upper button panel
         HBox upperRight = new HBox(oneSpot,fourSpot,eightSpot,tenSpot);
