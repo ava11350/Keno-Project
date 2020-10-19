@@ -54,7 +54,7 @@ public class KenoColoring{
         String backgroundColor = "#cc0e74";
         String accentColor = "#790c5a";
 
-        String font = "'Apple Chancery'";
+        String font = "'Arial'";
         String fontSize = "24px";
         String fontSizeSmall = "16px";
 
@@ -95,7 +95,7 @@ public class KenoColoring{
         String backgroundColor = "#ff9642";
         String accentColor = "#646464";
 
-        String font = "'Apple Chancery'";
+        String font = "'Arial'";
         String fontSize = "24px";
         String fontSizeSmall = "16px";
 
@@ -136,7 +136,7 @@ public class KenoColoring{
         String backgroundColor = "#b83b5e";
         String accentColor = "#6a2c70";
 
-        String font = "'Apple Chancery'";
+        String font = "'Arial'";
         String fontSize = "24px";
         String fontSizeSmall = "16px";
 
@@ -178,7 +178,7 @@ public class KenoColoring{
         String backgroundColor = "#fafcc2";
         String accentColor = "#f9c0c0";
 
-        String font = "'Apple Chancery'";
+        String font = "'Arial'";
         String fontSize = "24px";
         String fontSizeSmall = "16px";
 
@@ -220,7 +220,7 @@ public class KenoColoring{
         String backgroundColor = "#335d2d";
         String accentColor = "#fe7171";
 
-        String font = "'Apple Chancery'";
+        String font = "'Arial'";
         String fontSize = "24px";
         String fontSizeSmall = "16px";
 
@@ -262,7 +262,7 @@ public class KenoColoring{
         String backgroundColor = "#feceab";
         String accentColor = "#e84a5f";
 
-        String font = "'Apple Chancery'";
+        String font = "'Arial'";
         String fontSize = "24px";
         String fontSizeSmall = "16px";
 
@@ -287,13 +287,13 @@ public class KenoColoring{
     }
 
     public KenoColoring(){
-        GENERAL = "-fx-font-size : 16px; -fx-font-family : ''; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #fffaec;";
+        GENERAL = "-fx-font-size : 16px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #fffaec;";
 
-        IDLE = "-fx-font-size : 24px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #fffaec;";
+        IDLE = "-fx-font-size : 24px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #fffaec;";
 
-        HOVERED = "-fx-font-size : 24px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #e5e1d4;";
+        HOVERED = "-fx-font-size : 24px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #e5e1d4;";
 
-        CLICKED = "-fx-font-size : 24px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #b2afa5;";
+        CLICKED = "-fx-font-size : 24px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" + "-fx-background-color: #b2afa5;";
         ColorPallete = "Lesbian";
     }
 

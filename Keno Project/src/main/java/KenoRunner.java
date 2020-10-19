@@ -11,14 +11,14 @@ import javafx.geometry.Pos;
 
 public class KenoRunner extends Application {
 
-	public static String IDLE_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String IDLE_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #fffaec;";
-	public static String HOVERED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String HOVERED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #e5e1d4;";
-	public static String CLICKED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String CLICKED_BUTTON_STYLE = "-fx-font-size : 32px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #b2afa5;";
 
-	public static String GENERAL_TEXT_BUTTON_STYLE = "-fx-font-size : 16px; -fx-font-family : 'Apple Chancery'; -fx-border-width: 4px; -fx-border-color: darkred;" +
+	public static String GENERAL_TEXT_BUTTON_STYLE = "-fx-font-size : 16px; -fx-font-family : 'Arial'; -fx-border-width: 4px; -fx-border-color: darkred;" +
 			"-fx-background-color: #fffaec;";
 
 	public static void main(String[] args) {

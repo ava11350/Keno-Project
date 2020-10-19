@@ -447,7 +447,7 @@ public class KenoGameScene {
                     gridButtons.get(q).setDisable(false);
                 }
                 if(instance.userInput.contains(new Integer(current.getText()))){ //if it was already selected, remove selection
-                    gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
+                    gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + "; -fx-font-family: 'Arial';");
                     instance.userInput.remove(instance.userInput.indexOf(new Integer(current.getText())));
                     selectedGrids.setText("Selected:\n");
                     for(int x = 0; x<instance.userInput.size(); x++){
@@ -463,7 +463,7 @@ public class KenoGameScene {
                     }
                 }
                 else {
-                    gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+                    gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px; -fx-font-family: 'Arial';");
 
                     if(instance.userInput.size() != 0) { // dont add comma on first line
                         selectedGrids.setText(selectedGrids.getText() + ", " + current.getText());
@@ -489,7 +489,7 @@ public class KenoGameScene {
 
     public void resetButtons(){
         for (int i = 0; i<gridButtons.size(); i++){
-            gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
+            gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + "; -fx-font-family: 'Arial';");
         }
         selectedGrids.setText("Selected:\n");
         drawnGrids.setText("Drawn:\n");
@@ -501,10 +501,10 @@ public class KenoGameScene {
     public void softReset(){
         for (int i = 0; i < gridButtons.size(); i++){
             if(!instance.userInput.contains(new Integer(gridButtons.get(i).getText()))){
-                gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
+                gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + "; -fx-font-family: 'Arial';");
             }
             else{
-                gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+                gridButtons.get(i).setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px; -fx-font-family: 'Arial';");
             }
         }
         drawnGrids.setText("Drawn:\n");
@@ -529,9 +529,9 @@ public class KenoGameScene {
 
         Button b1 = gridButtons.get(draw - 1);
         if(instance.userInput.contains(new Integer(b1.getText())))
-            b1.setStyle("-fx-background-color: " + "#00ff00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+            b1.setStyle("-fx-background-color: " + "#00ff00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px; -fx-font-family: 'Arial';");
         else
-            b1.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + ";");
+            b1.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + "; -fx-font-family: 'Arial';");
     });
 
     Timeline timeline = new Timeline(
@@ -620,7 +620,7 @@ public class KenoGameScene {
         }
         Button selected = gridButtons.get(randomNumber-1);
         //System.out.println("Random number: " + randomNumber + " Grid contents: "+ selected.getText());
-        selected.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+        selected.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px; -fx-font-family: 'Arial';");
 
 
 
@@ -763,13 +763,13 @@ public class KenoGameScene {
             if(instance!=null) {
                 if (instance.userInput.contains(new Integer(current.getText())))
                     if (instance.computerResult.contains(new Integer(current.getText())))
-                        current.setStyle("-fx-background-color: " + "#00FF00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+                        current.setStyle("-fx-background-color: " + "#00FF00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px; -fx-font-family: 'Arial';");
                     else
-                        current.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+                        current.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px; -fx-font-family: 'Arial';");
                 else if (instance.computerResult.contains(new Integer(current.getText())))
-                    current.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + ";");
+                    current.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + "; -fx-font-family: 'Arial';");
                 else
-                    current.setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
+                    current.setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + "; -fx-font-family: 'Arial';");
             }
         }
     }

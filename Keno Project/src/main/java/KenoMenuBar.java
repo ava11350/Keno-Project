@@ -12,13 +12,15 @@ public class KenoMenuBar {
     private MenuItem exitMenuItem;
     private MenuBar menuBar;
 
+    private String menuFONT = "-fx-font-size : 12px; -fx-font-family : 'Arial';";
+
     public KenoMenuBar(){
         menuBarMenu = new Menu("Menu");
         rulesMenuItem = new MenuItem("Rules");
         oddsMenuItem = new MenuItem("Odds");
         exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction(e -> {
-            exitMenuItem.setStyle(KenoRunner.CLICKED_BUTTON_STYLE);
+            exitMenuItem.setStyle(menuFONT);
             System.exit(0);
         });
         menuBarMenu.getItems().add(rulesMenuItem);
@@ -33,13 +35,13 @@ public class KenoMenuBar {
     }
     public void setRulesMenuItem(Stage primaryStage, Scene rulesScene){
         rulesMenuItem.setOnAction(e -> {
-            rulesMenuItem.setStyle(KenoRunner.CLICKED_BUTTON_STYLE);
+            rulesMenuItem.setStyle(menuFONT);
             primaryStage.setScene(rulesScene);
         });
     }
     public void setOddsMenuItem(Stage primaryStage, Scene oddsScene){
         oddsMenuItem.setOnAction(e -> {
-            oddsMenuItem.setStyle(KenoRunner.CLICKED_BUTTON_STYLE);
+            oddsMenuItem.setStyle(menuFONT);
             primaryStage.setScene(oddsScene);
         });
     }
