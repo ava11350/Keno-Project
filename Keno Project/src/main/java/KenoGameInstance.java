@@ -5,7 +5,7 @@ public class KenoGameInstance {
     public ArrayList<Integer> userInput;
     public ArrayList<Integer> computerResult;
     public ArrayList<Integer> hits;
-    private int spotsToPlay;
+    public int spotsToPlay;
     public int moneyWon;
     public KenoGameInstance(int spots){
         userInput = new ArrayList<>();
@@ -16,6 +16,9 @@ public class KenoGameInstance {
     }
 
     public boolean pushInput(int val){ //push user input into userInput array. Returns true on success, false on error.
+        if(val > 80 || val < 1){ //val must be within bounds
+            return false;
+        }
         if(userInput.size() == spotsToPlay){
             return false;
         }
