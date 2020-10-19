@@ -49,7 +49,6 @@ public class KenoGameInstance {
         }
         computerResult.add(temp);
         if(userInput.contains(temp)){
-            System.out.println("Hit!");
             hits.add(temp);
             checkWinnings();
         }

@@ -323,7 +323,6 @@ public class KenoGameScene {
 
         ourKenoMenuBar.addNewLookMenuItem();
         ourKenoMenuBar.getMenuBar().getMenus().get(0).setOnAction(e -> {
-            System.out.println("new look pressed");
             setNewLook();
         });
 
@@ -363,7 +362,6 @@ public class KenoGameScene {
                 oneSpot.setStyle(IDLE_TEXT);
             }
             oneSpot.setStyle(CLICK_TEXT);
-            System.out.println("ONE SPOT CLICKED");
             if(instance != null){
                 instance = null;
                 resetButtons();
@@ -384,7 +382,6 @@ public class KenoGameScene {
                 fourSpot.setStyle(IDLE_TEXT);
             }
             fourSpot.setStyle(CLICK_TEXT);
-            System.out.println("FOUR SPOT CLICKED");
             if(instance != null){
                 instance = null;
                 resetButtons();
@@ -405,7 +402,6 @@ public class KenoGameScene {
                 eightSpot.setStyle(IDLE_TEXT);
             }
             eightSpot.setStyle(CLICK_TEXT);
-            System.out.println("EIGHT SPOT CLICKED");
             if(instance != null){
                 instance = null;
                 resetButtons();
@@ -426,7 +422,6 @@ public class KenoGameScene {
                 tenSpot.setStyle(IDLE_TEXT);
             }
             tenSpot.setStyle(CLICK_TEXT);
-            System.out.println("TEN SPOT CLICKED");
             if(instance != null){
                 instance = null;
                 resetButtons();
@@ -451,7 +446,6 @@ public class KenoGameScene {
                 for(int q = 0; q<gridButtons.size(); q++){ //ensure all buttons are enabled
                     gridButtons.get(q).setDisable(false);
                 }
-                System.out.println("Button pressed: "+ current.getText());
                 if(instance.userInput.contains(new Integer(current.getText()))){ //if it was already selected, remove selection
                     gridButtons.get(gridButtons.indexOf(current)).setStyle("-fx-background-color: " + KenoColoring.getBackground() + ";" + " -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getBorder() + ";");
                     instance.userInput.remove(instance.userInput.indexOf(new Integer(current.getText())));
@@ -522,8 +516,6 @@ public class KenoGameScene {
     // Overwriting computerPicks() to get it to time properly
     EventHandler<ActionEvent> eventHandler = (f -> {
         int draw = instance.computerDraw();
-        System.out.println(draw);
-
             if((instance.computerResult.size()-1)%5 == 0){
                 if(instance.computerResult.size()-1 == 0)
                     drawnGrids.setText(drawnGrids.getText() + draw);
@@ -537,7 +529,7 @@ public class KenoGameScene {
 
         Button b1 = gridButtons.get(draw - 1);
         if(instance.userInput.contains(new Integer(b1.getText())))
-            b1.setStyle("-fx-background-color: " + "#00FF00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
+            b1.setStyle("-fx-background-color: " + "#00ff00" + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
         else
             b1.setStyle("-fx-background-color: " + KenoColoring.getAccent() + "; -fx-border-width: 2px; -fx-border-color: " + KenoColoring.getPrimary() + ";");
     });
@@ -623,11 +615,11 @@ public class KenoGameScene {
 
     EventHandler<ActionEvent> eventHandler2 = (f -> {
         int randomNumber = new Random().nextInt(80) + 1;
-        while(instance.userInput.contains(new Integer(randomNumber))){
+        while(instance.userInput.contains(randomNumber)){
             randomNumber = new Random().nextInt(80) + 1;
         }
         Button selected = gridButtons.get(randomNumber-1);
-        System.out.println("Random number: " + randomNumber + " Grid contents: "+ selected.getText());
+        //System.out.println("Random number: " + randomNumber + " Grid contents: "+ selected.getText());
         selected.setStyle("-fx-background-color: " + KenoColoring.getPrimary() + "; -fx-border-color:" + KenoColoring.getBorder() + "; -fx-border-width: 2px;");
 
 
@@ -680,7 +672,7 @@ public class KenoGameScene {
 
     public void setBetButtonHandle(){
         bet.setStyle(CLICK_TEXT);
-        if(instance.userInput.size()< numSpot){
+        if(instance.userInput.size() < numSpot){
             randomFill();
         }else{
             computerPicks();
