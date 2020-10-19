@@ -40,6 +40,7 @@ public class KenoGameScene {
 
     private GridPane grid;
     private VBox leftVbox;
+    private VBox texts;
     private HBox innerRight;
     private VBox rightVbox;
     private HBox upperRight;
@@ -130,8 +131,8 @@ public class KenoGameScene {
 
         bet = new Button("BET");
         bet.setStyle(GEN_TEXT);
-        bet.setMinWidth(600);
-        bet.setMinHeight(100);
+        bet.setMinWidth(400);
+        bet.setMinHeight(170);
         bet.setDisable(true);
 
 
@@ -207,7 +208,7 @@ public class KenoGameScene {
 //        grid.setGridLinesVisible(true);
 
         //Text Side panel
-        VBox texts = new VBox(selectedGrids, drawnGrids, drawResult, winnings);
+        texts = new VBox(selectedGrids, drawnGrids, drawResult, winnings);
         texts.setStyle(IDLE_TEXT);
         texts.setPadding(new Insets(20,0,20,0));
         //Left Side panel
@@ -220,32 +221,48 @@ public class KenoGameScene {
         //Draws Vbox
         oneDraw = new Button("1");
 //        oneDraw.setStyle(IDLE_TEXT);
-        oneDraw.setMinWidth(25);
-        oneDraw.setMinHeight(25);
+        oneDraw.setMinWidth(60);
+        oneDraw.setMinHeight(20);
         oneDraw.setOnMouseClicked(e -> {
             numDraws = 1;
+            oneDraw.setStyle(CLICK_TEXT);
+            twoDraw.setStyle(IDLE_TEXT);
+            threeDraw.setStyle(IDLE_TEXT);
+            fourDraw.setStyle(IDLE_TEXT);
         });
 
         twoDraw = new Button("2");
 //        twoDraw.setStyle(IDLE_TEXT);
-        twoDraw.setMinWidth(25);
-        twoDraw.setMinHeight(25);
+        twoDraw.setMinWidth(60);
+        twoDraw.setMinHeight(20);
         twoDraw.setOnMouseClicked(e ->{
             numDraws =2;
+            oneDraw.setStyle(IDLE_TEXT);
+            twoDraw.setStyle(CLICK_TEXT);
+            threeDraw.setStyle(IDLE_TEXT);
+            fourDraw.setStyle(IDLE_TEXT);
         });
         threeDraw = new Button("3");
 //        threeDraw.setStyle(IDLE_TEXT);
-        threeDraw.setMinWidth(25);
-        threeDraw.setMinHeight(25);
+        threeDraw.setMinWidth(60);
+        threeDraw.setMinHeight(20);
         threeDraw.setOnMouseClicked(e -> {
             numDraws = 3;
+            oneDraw.setStyle(IDLE_TEXT);
+            twoDraw.setStyle(IDLE_TEXT);
+            threeDraw.setStyle(CLICK_TEXT);
+            fourDraw.setStyle(IDLE_TEXT);
         });
         fourDraw = new Button("4");
 //        fourDraw.setStyle(IDLE_TEXT);
-        fourDraw.setMinWidth(25);
-        fourDraw.setMinHeight(25);
+        fourDraw.setMinWidth(60);
+        fourDraw.setMinHeight(20);
         fourDraw.setOnMouseClicked(e -> {
             numDraws = 4;
+            oneDraw.setStyle(IDLE_TEXT);
+            twoDraw.setStyle(IDLE_TEXT);
+            threeDraw.setStyle(IDLE_TEXT);
+            fourDraw.setStyle(CLICK_TEXT);
         });
 
         GridPane drawSelections = new GridPane();
@@ -258,6 +275,10 @@ public class KenoGameScene {
         drawSelections.add(fourDraw, 1,1);
         Text drawText = new Text("Drawings");
         drawText.setStyle(GEN_TEXT);
+        oneDraw.setStyle(CLICK_TEXT);
+        twoDraw.setStyle(IDLE_TEXT);
+        threeDraw.setStyle(IDLE_TEXT);
+        fourDraw.setStyle(IDLE_TEXT);
         VBox drawBox = new VBox(drawText, drawSelections);
 
         //Bottom button panel
@@ -290,7 +311,7 @@ public class KenoGameScene {
         //Scene creation
         KenoMenuBar ourKenoMenuBar = new KenoMenuBar();
         VBox mainVbox = new VBox(ourKenoMenuBar.getMenuBar(), mainHbox);
-        gameScene = new Scene(mainVbox, 1095,1000);
+        gameScene = new Scene(mainVbox, 1095,933);
 
         //rules screen
         KenoRulesScene rulesSceneObj = new KenoRulesScene(primaryStage, gameScene);
@@ -693,6 +714,39 @@ public class KenoGameScene {
         rulesButton.setStyle(IDLE_TEXT);
         oddsButton.setStyle(IDLE_TEXT);
         exitButton.setStyle(IDLE_TEXT);
+        texts.setStyle(IDLE_TEXT);
+        switch(numDraws) {
+            case 1:
+                oneDraw.setStyle(CLICK_TEXT);
+                twoDraw.setStyle(IDLE_TEXT);
+                threeDraw.setStyle(IDLE_TEXT);
+                fourDraw.setStyle(IDLE_TEXT);
+                break;
+            case 2:
+                oneDraw.setStyle(IDLE_TEXT);
+                twoDraw.setStyle(CLICK_TEXT);
+                threeDraw.setStyle(IDLE_TEXT);
+                fourDraw.setStyle(IDLE_TEXT);
+                break;
+            case 3:
+                oneDraw.setStyle(IDLE_TEXT);
+                twoDraw.setStyle(IDLE_TEXT);
+                threeDraw.setStyle(CLICK_TEXT);
+                fourDraw.setStyle(IDLE_TEXT);
+                break;
+            case 4:
+                oneDraw.setStyle(IDLE_TEXT);
+                twoDraw.setStyle(IDLE_TEXT);
+                threeDraw.setStyle(IDLE_TEXT);
+                fourDraw.setStyle(CLICK_TEXT);
+                break;
+            default:
+                oneDraw.setStyle(IDLE_TEXT);
+                twoDraw.setStyle(IDLE_TEXT);
+                threeDraw.setStyle(IDLE_TEXT);
+                fourDraw.setStyle(IDLE_TEXT);
+                break;
+        }
 
         if(oneSpot.getStyle() == OLD_IDLE)
             oneSpot.setStyle(IDLE_TEXT);
